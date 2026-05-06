@@ -51,6 +51,10 @@ body {
   transform: translateX(-50%);
 }
 
+.memory-card-shell[data-side='center'] {
+  left: 50%;
+}
+
 .memory-card-shell[data-side='left'] {
   left: calc(50% - clamp(7rem, 18vw, 15rem));
 }
@@ -67,9 +71,9 @@ body {
 }
 
 @media (max-width: 900px) {
-
   .memory-card-shell[data-side='left'],
-  .memory-card-shell[data-side='right'] {
+  .memory-card-shell[data-side='right'],
+  .memory-card-shell[data-side='center'] {
     left: 50%;
   }
 }

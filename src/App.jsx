@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Parallax } from 'react-scroll-parallax';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react';
 import MemoryCard from './components/MemoryCard';
@@ -32,7 +32,7 @@ function HangingYarny({ src, alt, className, float = 0, delay = 0 }) {
 
 function IntroHero({ started, onStart }) {
   return (
-    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6">
+    <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-12 sm:px-6">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center opacity-40 blur-[2px]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.18),transparent_28%),linear-gradient(180deg,rgba(4,10,8,0.15),rgba(4,10,8,0.85))]" />
@@ -62,7 +62,7 @@ function IntroHero({ started, onStart }) {
         <motion.button
           type="button"
           onClick={onStart}
-          className="group relative inline-flex flex-col items-center justify-center"
+          className="group relative inline-flex max-w-full flex-col items-center justify-center"
           whileTap={{ scale: 0.98 }}
         >
           <AnimatePresence mode="wait">
@@ -86,12 +86,12 @@ function IntroHero({ started, onStart }) {
                     ease: 'easeInOut',
                   },
                 }}
-                className="relative mb-8 h-40 w-40 md:h-52 md:w-52"
+                className="relative mb-6 h-32 w-32 sm:mb-8 sm:h-40 sm:w-40 md:h-52 md:w-52"
               >
                 <div className="absolute inset-0 rounded-full border border-white/10 bg-white/5 blur-sm" />
-                <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full border-[18px] border-yarn-red border-r-yarn-blue border-l-yarn-red/70 shadow-thread md:h-32 md:w-32" />
-                <div className="absolute left-[28%] top-[32%] h-12 w-20 rotate-45 rounded-full border-[12px] border-yarn-blue border-b-yarn-red/70" />
-                <div className="absolute right-[28%] top-[34%] h-12 w-20 -rotate-45 rounded-full border-[12px] border-yarn-red border-b-yarn-blue/70" />
+                <div className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 rounded-full border-[14px] border-yarn-red border-r-yarn-blue border-l-yarn-red/70 shadow-thread sm:h-24 sm:w-24 sm:border-[18px] md:h-32 md:w-32" />
+                <div className="absolute left-[28%] top-[32%] h-10 w-16 rotate-45 rounded-full border-[10px] border-yarn-blue border-b-yarn-red/70 sm:h-12 sm:w-20 sm:border-[12px]" />
+                <div className="absolute right-[28%] top-[34%] h-10 w-16 -rotate-45 rounded-full border-[10px] border-yarn-red border-b-yarn-blue/70 sm:h-12 sm:w-20 sm:border-[12px]" />
                 <div className="absolute bottom-[16%] left-1/2 h-14 w-2 -translate-x-1/2 rounded-full bg-gradient-to-b from-yarn-red via-yarn-blue to-transparent" />
               </motion.div>
             ) : (
@@ -110,20 +110,20 @@ function IntroHero({ started, onStart }) {
 
           <motion.div
             layout
-            className="rounded-[2rem] border border-white/15 bg-white/10 px-7 py-5 shadow-float backdrop-blur-md"
+            className="mx-auto w-[min(92vw,46rem)] rounded-[1.7rem] border border-white/15 bg-white/10 px-4 py-5 shadow-float backdrop-blur-md sm:rounded-[2rem] sm:px-7"
           >
-            <p className="font-body text-sm uppercase tracking-[0.4em] text-yarn-cream/80">
+            <p className="font-body text-[0.65rem] uppercase tracking-[0.28em] text-yarn-cream/80 sm:text-sm sm:tracking-[0.4em]">
               Segundo Aniversario
             </p>
-            <h1 className="mt-2 font-display text-5xl leading-none text-white md:text-7xl">
+            <h1 className="mt-2 font-display text-[2.5rem] leading-none text-white sm:text-5xl md:text-7xl">
               Nuestro Hilo:
               <span className="block text-yarn-cream">Año 1 &amp; 2</span>
             </h1>
-            <p className="mt-4 max-w-xl font-body text-base leading-7 text-white/80 md:text-lg">
+            <p className="mx-auto mt-4 max-w-xl font-body text-sm leading-6 text-white/80 sm:text-base sm:leading-7 md:text-lg">
               Un scrapbook digital inspirado en los caminos suaves, los nudos fuertes
               y la magia silenciosa de seguir construyendo juntos.
             </p>
-            <p className="mt-6 font-body text-xs uppercase tracking-[0.35em] text-white/55">
+            <p className="mt-6 font-body text-[0.65rem] uppercase tracking-[0.28em] text-white/55 sm:text-xs sm:tracking-[0.35em]">
               Haz clic o empieza a bajar
             </p>
           </motion.div>
@@ -135,12 +135,50 @@ function IntroHero({ started, onStart }) {
 
 export default function App() {
   const [started, setStarted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const { scrollYProgress } = useScroll();
 
-  const points = useMemo(
-    () => memories.map((memory) => ({ id: memory.id, x: memory.threadX, y: memory.top + 120 })),
-    [],
-  );
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 767px)');
+    const sync = () => setIsMobile(media.matches);
+
+    sync();
+    media.addEventListener('change', sync);
+
+    return () => media.removeEventListener('change', sync);
+  }, []);
+
+  const timelineLayout = useMemo(() => {
+    if (!isMobile) {
+      return {
+        height: timelineHeight,
+        memories,
+        points: memories.map((memory) => ({
+          id: memory.id,
+          x: memory.threadX,
+          y: memory.top + 120,
+        })),
+      };
+    }
+
+    const mobileMemories = memories.map((memory, index) => ({
+      ...memory,
+      side: 'center',
+      tilt: index % 2 === 0 ? -2 : 2,
+      top: 260 + index * 560,
+      threadX: 500 + (index % 2 === 0 ? -10 : 10),
+    }));
+
+    return {
+      height: 260 + mobileMemories.length * 560 + 760,
+      memories: mobileMemories,
+      points: mobileMemories.map((memory) => ({
+        id: memory.id,
+        x: memory.threadX,
+        y: memory.top + 110,
+      })),
+    };
+  }, [isMobile]);
 
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
     if (latest > 0.015) {
@@ -162,22 +200,22 @@ export default function App() {
           </Parallax>
         </div>
 
-        <div className="relative z-20 mx-auto max-w-6xl px-4 py-24 md:px-8">
-          <div className="mx-auto mb-14 max-w-2xl text-center">
-            <p className="font-body text-sm uppercase tracking-[0.35em] text-yarn-cream/70">
+        <div className="relative z-20 mx-auto max-w-6xl px-4 py-16 sm:py-24 md:px-8">
+          <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-14">
+            <p className="font-body text-[0.68rem] uppercase tracking-[0.28em] text-yarn-cream/70 sm:text-sm sm:tracking-[0.35em]">
               Timeline principal
             </p>
-            <h2 className="mt-3 font-display text-4xl text-yarn-cream md:text-6xl">
+            <h2 className="mt-3 font-display text-[2.3rem] text-yarn-cream sm:text-4xl md:text-6xl">
               Un hilo que va cosiendo nuestra historia
             </h2>
-            <p className="mt-4 text-base leading-7 text-white/72">
+            <p className="mt-4 text-sm leading-6 text-white/72 sm:text-base sm:leading-7">
               La línea central se dibuja con el scroll y cada foto se balancea como
               si estuviera prendida de la lana. Reemplaza estos recuerdos de ejemplo
               por tus fotos y textos reales.
             </p>
           </div>
 
-          <div className="timeline-shell relative mx-auto max-w-6xl" style={{ height: timelineHeight }}>
+          <div className="timeline-shell relative mx-auto max-w-6xl" style={{ height: timelineLayout.height }}>
             <HangingYarny
               src={yarnyRojoColgando}
               alt="Yarny rojo acompañando el timeline"
@@ -193,19 +231,19 @@ export default function App() {
               delay={0.45}
             />
 
-            <YarnThread progress={scrollYProgress} points={points} height={timelineHeight} />
+            <YarnThread progress={scrollYProgress} points={timelineLayout.points} height={timelineLayout.height} />
 
-            {memories.map((memory, index) => (
+            {timelineLayout.memories.map((memory, index) => (
               <Parallax
                 key={memory.id}
                 translateY={[
-                  `${index % 2 === 0 ? 26 : 12}px`,
-                  `${index % 2 === 0 ? -18 : -30}px`,
+                  `${isMobile ? 10 : index % 2 === 0 ? 26 : 12}px`,
+                  `${isMobile ? -12 : index % 2 === 0 ? -18 : -30}px`,
                 ]}
-                speed={index % 2 === 0 ? -4 : 5}
+                speed={isMobile ? 2 : index % 2 === 0 ? -4 : 5}
                 className="absolute inset-x-0"
               >
-                <MemoryCard memory={memory} />
+                <MemoryCard memory={memory} isMobile={isMobile} />
               </Parallax>
             ))}
 
@@ -214,10 +252,10 @@ export default function App() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.5 }}
               transition={{ duration: 0.9 }}
-              className="absolute bottom-12 left-1/2 z-20 w-[min(90vw,36rem)] -translate-x-1/2 text-center"
+              className="absolute inset-x-0 bottom-8 z-20 flex justify-center px-4 text-center sm:bottom-12"
             >
-              <div className="relative overflow-hidden rounded-[2.4rem] border border-white/10 bg-white/10 p-8 backdrop-blur-md">
-                <div className="mx-auto h-28 w-28 animate-pulseGlow">
+              <div className="relative w-[min(92vw,36rem)] overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 p-5 backdrop-blur-md sm:w-[min(90vw,36rem)] sm:rounded-[2.4rem] sm:p-8">
+                <div className="mx-auto h-20 w-20 animate-pulseGlow sm:h-28 sm:w-28">
                   <svg viewBox="0 0 120 120" className="h-full w-full">
                     <path
                       d="M60 103 C 15 73, 8 38, 28 22 C 42 10, 58 20, 60 34 C 62 20, 78 10, 92 22 C 112 38, 105 73, 60 103 Z"
@@ -234,11 +272,11 @@ export default function App() {
                     </defs>
                   </svg>
                 </div>
-                <p className="font-note text-3xl text-yarn-cream">El nudo más bonito es el que sigue creciendo.</p>
-                <h3 className="mt-3 font-display text-4xl text-white md:text-5xl">
+                <p className="font-note text-[1.9rem] text-yarn-cream sm:text-3xl">El nudo más bonito es el que sigue creciendo.</p>
+                <h3 className="mt-3 font-display text-[2.2rem] text-white sm:text-4xl md:text-5xl">
                   Gracias por estos dos años
                 </h3>
-                <p className="mt-4 text-base leading-7 text-white/78">
+                <p className="mt-4 text-sm leading-6 text-white/78 sm:text-base sm:leading-7">
                   Si este hilo nos trajo hasta aquí, quiero seguir descubriendo
                   cada paisaje contigo, recuerdo por recuerdo.
                 </p>
@@ -246,7 +284,7 @@ export default function App() {
                   type="button"
                   whileHover={{ scale: 1.04 }}
                   whileTap={{ scale: 0.98 }}
-                  className="mt-8 rounded-full border border-white/20 bg-yarn-cream px-7 py-3 font-body text-sm font-semibold uppercase tracking-[0.3em] text-forest-950"
+                  className="mt-6 rounded-full border border-white/20 bg-yarn-cream px-5 py-3 font-body text-[0.68rem] font-semibold uppercase tracking-[0.24em] text-forest-950 sm:mt-8 sm:px-7 sm:text-sm sm:tracking-[0.3em]"
                 >
                   Continuará...
                 </motion.button>
