@@ -232,9 +232,9 @@ export default function App() {
               Un hilo que va cosiendo nuestra historia
             </h2>
             <p className="mt-4 text-sm leading-6 text-white/72 sm:text-base sm:leading-7">
-              La línea central se dibuja con el scroll y cada foto se balancea como
-              si estuviera prendida de la lana. Reemplaza estos recuerdos de ejemplo
-              por tus fotos y textos reales.
+              Cada tramo de este recorrido guarda una salida, una risa, una fecha
+              importante y una pequeña prueba de todo lo bonito que hemos vivido
+              juntos durante estos dos años.
             </p>
           </div>
 
@@ -267,7 +267,7 @@ export default function App() {
             <ThreadStoryMarker
               src={yarnysUnidos}
               alt="Yarnys unidos en el cambio de color del hilo"
-              className="left-[42%] top-[54%] -translate-x-1/2"
+              className="left-[46%] top-[50.9%] -translate-x-1/2"
               sizeClassName="w-36 sm:w-44 md:w-52"
               delay={0.2}
             />
