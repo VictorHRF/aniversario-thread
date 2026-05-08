@@ -5,7 +5,10 @@ import MemoryCard from './components/MemoryCard';
 import YarnThread from './components/YarnThread';
 import { memories, timelineHeight } from './data/memories';
 import yarnyAzulColgando from './assets/photos/YarnyAzulColgando.png';
+import yarnyCorazon from './assets/photos/YarnyCorazon.png';
+import yarnyRojo from './assets/photos/YarnyRojo.png';
 import yarnyRojoColgando from './assets/photos/YarnyRojoColgando.png';
+import yarnysUnidos from './assets/photos/YarnysUnidos.png';
 
 function HangingYarny({ src, alt, className, float = 0, delay = 0 }) {
   return (
@@ -26,6 +29,26 @@ function HangingYarny({ src, alt, className, float = 0, delay = 0 }) {
           className="relative z-10 h-auto w-full object-contain drop-shadow-[0_18px_28px_rgba(0,0,0,0.38)]"
         />
       </motion.div>
+    </motion.div>
+  );
+}
+
+function ThreadStoryMarker({ src, alt, className, sizeClassName, delay = 0 }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9, y: 24 }}
+      whileInView={{ opacity: 1, scale: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={`pointer-events-none absolute z-30 ${className}`}
+    >
+      <motion.img
+        src={src}
+        alt={alt}
+        className={`h-auto object-contain drop-shadow-[0_18px_30px_rgba(0,0,0,0.34)] ${sizeClassName}`}
+        animate={{ y: [0, -8, 0], rotate: [-1, 1, -1] }}
+        transition={{ duration: 6.2, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+      />
     </motion.div>
   );
 }
@@ -233,6 +256,24 @@ export default function App() {
 
             <YarnThread progress={scrollYProgress} points={timelineLayout.points} height={timelineLayout.height} />
 
+            <ThreadStoryMarker
+              src={yarnyRojo}
+              alt="Yarny rojo al inicio del hilo"
+              className="left-1/2 top-14 -translate-x-1/2 sm:top-10"
+              sizeClassName="w-24 sm:w-28 md:w-32"
+              delay={0.1}
+            />
+
+            <ThreadStoryMarker
+              src={yarnysUnidos}
+              alt="Yarnys unidos en el cambio de color del hilo"
+              className="left-[42%] top-[54%] -translate-x-1/2"
+              sizeClassName="w-36 sm:w-44 md:w-52"
+              delay={0.2}
+            />
+
+
+
             {timelineLayout.memories.map((memory, index) => (
               <Parallax
                 key={memory.id}
@@ -255,22 +296,12 @@ export default function App() {
               className="absolute inset-x-0 bottom-8 z-20 flex justify-center px-4 text-center sm:bottom-12"
             >
               <div className="relative w-[min(92vw,36rem)] overflow-hidden rounded-[2rem] border border-white/10 bg-white/10 p-5 backdrop-blur-md sm:w-[min(90vw,36rem)] sm:rounded-[2.4rem] sm:p-8">
-                <div className="mx-auto h-20 w-20 animate-pulseGlow sm:h-28 sm:w-28">
-                  <svg viewBox="0 0 120 120" className="h-full w-full">
-                    <path
-                      d="M60 103 C 15 73, 8 38, 28 22 C 42 10, 58 20, 60 34 C 62 20, 78 10, 92 22 C 112 38, 105 73, 60 103 Z"
-                      fill="none"
-                      stroke="url(#finalThread)"
-                      strokeWidth="8"
-                      strokeLinecap="round"
-                    />
-                    <defs>
-                      <linearGradient id="finalThread" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="#c74646" />
-                        <stop offset="100%" stopColor="#4a73d9" />
-                      </linearGradient>
-                    </defs>
-                  </svg>
+                <div className="mx-auto w-fit">
+                  <img
+                    src={yarnyCorazon}
+                    alt="Yarny formando un corazón"
+                    className="h-auto w-28 object-contain drop-shadow-[0_16px_24px_rgba(0,0,0,0.28)] sm:w-36"
+                  />
                 </div>
                 <p className="font-note text-[1.9rem] text-yarn-cream sm:text-3xl">El nudo más bonito es el que sigue creciendo.</p>
                 <h3 className="mt-3 font-display text-[2.2rem] text-white sm:text-4xl md:text-5xl">

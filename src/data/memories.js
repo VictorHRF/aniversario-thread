@@ -1,74 +1,257 @@
-export const timelineHeight = 4400;
+import oneYearImage from '../assets/photos/optimized/1año.jpg';
+import dayOneImage from '../assets/photos/optimized/Dia1_El dia que nos hicimos novios - cita en una cafeteria.jpg';
+import monthZeroImage from '../assets/photos/optimized/Mes0_Antes de ser novios - Visita a parque de atracciones.jpg';
+import monthOneImage from '../assets/photos/optimized/Mes1_Primeras citas - Ida al cine.jpg';
+import monthTwoImage from '../assets/photos/optimized/Mes2_Compartiendo con la familia - fuimos a jugar bolos con mi familia.jpg';
+import monthThreeImage from '../assets/photos/optimized/Mes3- Mas citas juntos - comiendo nuestros helados favoritos.jpg';
+import monthFourImage from '../assets/photos/optimized/Mes4_Planes en casa viendo la serie de friends muertos de risa.jpg';
+import monthFiveImage from '../assets/photos/optimized/Mes5_Salida con amigos a la naturaleza.jpg';
+import monthSixImage from '../assets/photos/optimized/Mes6_Siendo la mejor compania en fiestas - toco vestir elegantes.jpg';
+import monthSevenImage from '../assets/photos/optimized/Mes7_Citas romanticas en lugares increibles.jpg';
+import monthEightImage from '../assets/photos/optimized/Mes8_Baile de noche y dia de camping comenzando el año 2025.jpg';
+import monthNineImage from '../assets/photos/optimized/Mes9_Compartiendeo nuestro primer san valentin comiendo rica carne en las espadas brasileñas.jpg';
+import monthTenImage from '../assets/photos/optimized/Mes10_Salida de noche a un bar con los hermanos de mi novia.jpg';
+import monthElevenImage from '../assets/photos/optimized/Mes11_Salidas a centros comerciales de shoping y comiendo acai con mi novia preciosa.jpg';
+import monthTwelveImage from '../assets/photos/optimized/Mes12_Jugando con los sobrinos volviendo a ser niños de nuevo.jpg';
+import monthThirteenImage from '../assets/photos/optimized/Mes13_Primeros viajes juntos, de acampada con mi familia.jpg';
+import monthFourteenImage from '../assets/photos/optimized/Mes14_Citas en casa viendo severance.jpg';
+import monthFifteenImage from '../assets/photos/optimized/Mes15_armando pokemons de plastilina.jpg';
+import monthSixteenImage from '../assets/photos/optimized/Mes16_Celebrando mi cumpleaños gracias amor por la preparacion.jpg';
+import monthSeventeenImage from '../assets/photos/optimized/Mes17_Salida a un hotel con alberca y dia soleado.jpg';
+import monthEighteenImage from '../assets/photos/optimized/Mes18_Fiesta de disfraces en la casa de mi novia.jpg';
+import monthNineteenImage from '../assets/photos/optimized/Mes19_Celebrando el cumpleaños de mi novia fiesta sorpresa.jpg';
+import monthTwentyImage from '../assets/photos/optimized/Mes20_Celebrando navidad juntitos con nuestros sueters navideños.jpg';
+import monthTwentyOneImage from '../assets/photos/optimized/Mes21_Celebrando la boda de mi amigo Roberto, toco comprar traje.jpg';
+import monthTwentyTwoImage from '../assets/photos/optimized/Mes22_Celebrando san valentin comiendo en nuestro lugar de siempre.jpg';
+import monthTwentyThreeImage from '../assets/photos/optimized/Mes23_En otra boda mas pasandola muy bien con mi novia mi mejor compañia.jpg';
+import monthTwentyFourImage from '../assets/photos/optimized/Mes24_De viaje con la familia de mi novia a Acapulco.jpg';
 
-export const memories = [
+const rawMemories = [
   {
-    id: 'first-look',
-    top: 520,
-    side: 'right',
-    tilt: 5,
-    threadX: 560,
-    image:
-      'https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=900&q=80',
-    title: 'La chispa inicial',
+    key: 'month-0',
+    image: monthZeroImage,
+    title: 'Antes de ser novios',
+    date: 'Mes 0',
+    caption: 'La visita al parque de atracciones fue de esos días ligeros y especiales que, sin avisar, empiezan a quedarse en el corazón.',
+    note: 'Todavía no éramos novios, pero algo bonito ya estaba empezando.',
+  },
+  {
+    key: 'day-1',
+    image: dayOneImage,
+    title: 'El día 1',
+    date: 'Día 1',
+    caption: 'La cita en la cafetería fue el inicio oficial de esta historia que hoy seguimos tejiendo juntos.',
+    note: 'Aquí empezó oficialmente nuestro nosotros.',
+  },
+  {
+    key: 'month-1',
+    image: monthOneImage,
+    title: 'Primeras citas',
     date: 'Mes 1',
-    caption:
-      'Ese instante en el que todo parecía casual, pero ya estaba empezando algo importante.',
-    note: 'Aquí empezó el juego: una conversación y el mundo bajó el volumen.',
+    caption: 'Ir al cine contigo tenía esa emoción nueva de descubrirnos y querer repetir cada salida.',
+    note: 'Las primeras salidas contigo ya se sentían como hogar.',
   },
   {
-    id: 'small-adventures',
-    top: 1180,
-    side: 'left',
-    tilt: -6,
-    threadX: 440,
-    image:
-      'https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=900&q=80',
-    title: 'Pequeñas aventuras',
+    key: 'month-2',
+    image: monthTwoImage,
+    title: 'Con mi familia',
+    date: 'Mes 2',
+    caption: 'Jugar bolos con mi familia convirtió un plan sencillo en un recuerdo súper querido.',
+    note: 'Verte convivir con los míos me hizo sonreír más de una vez.',
+  },
+  {
+    key: 'month-3',
+    image: monthThreeImage,
+    title: 'Nuestros helados favoritos',
+    date: 'Mes 3',
+    caption: 'Entre más citas, más claro se volvía que hasta lo pequeño contigo sabía mejor.',
+    note: 'Helados, risas y muchas ganas de seguir repitiendo momentos así.',
+  },
+  {
+    key: 'month-4',
+    image: monthFourImage,
+    title: 'Friends y risas en casa',
+    date: 'Mes 4',
+    caption: 'Ese mes nos regaló un plan simple y perfecto: ver Friends en casa y morirnos de risa juntos.',
+    note: 'Nada como compartir carcajadas contigo en casa.',
+  },
+  {
+    key: 'month-5',
+    image: monthFiveImage,
+    title: 'Salida con amigos a la naturaleza',
+    date: 'Mes 5',
+    caption: 'Salir con amigos y respirar aire libre contigo abrió otra página bonita de nuestra historia.',
+    note: 'Qué bonito compartir paisajes y compañía contigo.',
+  },
+  {
+    key: 'month-6',
+    image: monthSixImage,
+    title: 'Mi mejor compañía en fiestas',
     date: 'Mes 6',
-    caption:
-      'Cafés largos, paseos simples y esa sensación de que contigo lo cotidiano siempre brilla más.',
-    note: 'Me enamoré de la paz que trae tu compañía.',
+    caption: 'Tocó vestir elegantes y confirmar, una vez más, que contigo cualquier evento se siente mejor.',
+    note: 'Siempre haces que cualquier ocasión se vea más bonita.',
   },
   {
-    id: 'shared-growth',
-    top: 1910,
-    side: 'right',
-    tilt: 7,
-    threadX: 575,
-    image:
-      'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80',
-    title: 'Crecer contigo',
-    date: 'Año 1',
-    caption:
-      'Aprendimos a acompañarnos incluso en días torcidos, y ahí el hilo se volvió más fuerte.',
-    note: 'No solo compartimos momentos; construimos refugio.',
+    key: 'month-7',
+    image: monthSevenImage,
+    title: 'Citas románticas',
+    date: 'Mes 7',
+    caption: 'Descubrimos lugares increíbles y nuevas formas de seguir enamorándonos en cada salida.',
+    note: 'Cada cita fue sumando un pedacito más a nuestra historia.',
   },
   {
-    id: 'celebrations',
-    top: 2680,
-    side: 'left',
-    tilt: -4,
-    threadX: 455,
-    image:
-      'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80',
-    title: 'Risas y celebraciones',
-    date: 'Año 1.5',
-    caption:
-      'Entre fotos, sorpresas y carcajadas, el tiempo dejó de correr y empezó a florecer.',
-    note: 'Tus sonrisas favoritas merecen museo propio.',
+    key: 'month-8',
+    image: monthEightImage,
+    title: 'Baile y camping',
+    date: 'Mes 8',
+    caption: 'Entre una noche de baile y un día de camping arrancamos una etapa llena de energía y amor.',
+    note: 'Contigo hasta los planes más distintos combinan perfecto.',
   },
   {
-    id: 'today',
-    top: 3390,
-    side: 'right',
-    tilt: 4,
-    threadX: 535,
-    image:
-      'https://images.unsplash.com/photo-1502780402662-acc01917d4d9?auto=format&fit=crop&w=900&q=80',
-    title: 'Nuestro presente',
-    date: 'Año 2',
-    caption:
-      'Dos años después, el hilo ya no solo nos une: también dibuja el mapa de todo lo que soñamos.',
-    note: 'Gracias por convertir lo simple en inolvidable.',
+    key: 'month-9',
+    image: monthNineImage,
+    title: 'Nuestro primer San Valentín',
+    date: 'Mes 9',
+    caption: 'Compartimos nuestro primer San Valentín comiendo delicioso y guardando otro recuerdo especial para el álbum.',
+    note: 'Nuestro amor también sabe a celebración.',
+  },
+  {
+    key: 'month-10',
+    image: monthTenImage,
+    title: 'Noche con tus hermanos',
+    date: 'Mes 10',
+    caption: 'La salida de noche con los hermanos de mi novia fue otra de esas veces donde me sentí feliz de compartir su mundo.',
+    note: 'Me encanta vivir también sus círculos contigo.',
+  },
+  {
+    key: 'month-11',
+    image: monthElevenImage,
+    title: 'Shopping y açaí',
+    date: 'Mes 11',
+    caption: 'Un día de centros comerciales, comida rica y tiempo juntos terminó siendo mucho más que un plan casual.',
+    note: 'Hasta las salidas tranquilas se vuelven favoritas contigo.',
+  },
+  {
+    key: 'month-12',
+    image: monthTwelveImage,
+    title: 'Volviendo a ser niños',
+    date: 'Mes 12',
+    caption: 'Jugar con los sobrinos nos regaló una escena tierna, divertida y muy nuestra.',
+    note: 'Qué bonito compartir también nuestra versión más juguetona.',
+  },
+  {
+    key: 'one-year',
+    image: oneYearImage,
+    title: 'Un año juntos',
+    date: '1 Año',
+    caption: 'Nuestro primer aniversario llegó como una celebración de todo lo que ya habíamos construido en solo doce meses.',
+    note: 'Doce meses bastaron para saber que este amor iba muy en serio.',
+  },
+  {
+    key: 'month-13',
+    image: monthThirteenImage,
+    title: 'Acampada con mi familia',
+    date: 'Mes 13',
+    caption: 'Nuestro primer viaje juntos y además compartido con mi familia quedó grabado con muchísimo cariño.',
+    note: 'Fue el inicio de muchos viajes que quiero seguir viviendo contigo.',
+  },
+  {
+    key: 'month-14',
+    image: monthFourteenImage,
+    title: 'Citas viendo Severance',
+    date: 'Mes 14',
+    caption: 'Las citas en casa viendo series nos regalaron una versión muy tierna y divertida de nuestra rutina.',
+    note: 'Nada como perder la noción del tiempo contigo en casa.',
+  },
+  {
+    key: 'month-15',
+    image: monthFifteenImage,
+    title: 'Pokémons de plastilina',
+    date: 'Mes 15',
+    caption: 'Armar pokémons de plastilina fue uno de esos planes creativos y absurdamente bonitos que solo mejoran por compartirlos.',
+    note: 'Amo la versión juguetona de nosotros.',
+  },
+  {
+    key: 'month-16',
+    image: monthSixteenImage,
+    title: 'Mi cumpleaños contigo',
+    date: 'Mes 16',
+    caption: 'La celebración de mi cumpleaños y toda tu preparación hicieron que ese día se sintiera aún más especial.',
+    note: 'Gracias por cuidar cada detalle con tanto amor.',
+  },
+  {
+    key: 'month-17',
+    image: monthSeventeenImage,
+    title: 'Hotel con alberca',
+    date: 'Mes 17',
+    caption: 'Una salida a un hotel con alberca y día soleado se convirtió en otra escapada feliz para nuestro álbum.',
+    note: 'Sol, agua y tú: combinación perfecta.',
+  },
+  {
+    key: 'month-18',
+    image: monthEighteenImage,
+    title: 'Fiesta de disfraces',
+    date: 'Mes 18',
+    caption: 'La fiesta de disfraces en tu casa nos dejó uno de esos recuerdos divertidos que se cuentan una y otra vez.',
+    note: 'Nos vemos bien hasta disfrazados.',
+  },
+  {
+    key: 'month-19',
+    image: monthNineteenImage,
+    title: 'Tu cumpleaños sorpresa',
+    date: 'Mes 19',
+    caption: 'Celebrar tu cumpleaños con una fiesta sorpresa fue una de las alegrías más bonitas de ese tramo del año.',
+    note: 'Verte feliz siempre vale todo.',
+  },
+  {
+    key: 'month-20',
+    image: monthTwentyImage,
+    title: 'Navidad juntitos',
+    date: 'Mes 20',
+    caption: 'La Navidad con nuestros suéteres navideños quedó como una postal preciosa de nosotros.',
+    note: 'Tú eres mi tradición favorita.',
+  },
+  {
+    key: 'month-21',
+    image: monthTwentyOneImage,
+    title: 'La boda de Roberto',
+    date: 'Mes 21',
+    caption: 'Celebrar la boda de mi amigo Roberto contigo a mi lado hizo que el momento se sintiera todavía mejor.',
+    note: 'Ir de traje vale la pena si es contigo.',
+  },
+  {
+    key: 'month-22',
+    image: monthTwentyTwoImage,
+    title: 'San Valentín en nuestro lugar',
+    date: 'Mes 22',
+    caption: 'Volvimos a nuestro lugar de siempre para celebrar San Valentín, y eso lo hizo aún más nuestro.',
+    note: 'Qué bonito tener rincones que ya nos pertenecen.',
+  },
+  {
+    key: 'month-23',
+    image: monthTwentyThreeImage,
+    title: 'Otra boda más',
+    date: 'Mes 23',
+    caption: 'Otra boda, otra pista, otra ocasión para confirmar que eres mi mejor compañía en todos lados.',
+    note: 'Siempre la paso mejor si estoy contigo.',
+  },
+  {
+    key: 'month-24',
+    image: monthTwentyFourImage,
+    title: 'Acapulco con tu familia',
+    date: 'Mes 24',
+    caption: 'El viaje a Acapulco con tu familia se siente como un gran cierre para estos dos años tan llenos de vida.',
+    note: 'Dos años después, sigo eligiendo este hilo contigo.',
   },
 ];
+
+export const memories = rawMemories.map((memory, index) => ({
+  id: memory.key,
+  top: 360 + index * 430,
+  side: index % 2 === 0 ? 'right' : 'left',
+  tilt: index % 2 === 0 ? 4 : -4,
+  threadX: index % 2 === 0 ? 560 : 440,
+  ...memory,
+}));
+
+export const timelineHeight = memories[memories.length - 1].top + 1100;
