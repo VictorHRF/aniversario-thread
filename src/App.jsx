@@ -1,14 +1,24 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Parallax } from 'react-scroll-parallax';
 import { AnimatePresence, motion, useMotionValueEvent, useScroll } from 'motion/react';
 import MemoryCard from './components/MemoryCard';
 import YarnThread from './components/YarnThread';
 import { memories, timelineHeight } from './data/memories';
+import centralPerk from './assets/photos/Central Perk.png';
+import detroitBecomeHuman from './assets/photos/DetroitBecomeHuman.png';
+import friendsLogo from './assets/photos/Friends-logo-3.png';
+import monicaTurkey from './assets/photos/Monica con el pavo en la cabeza.png';
+import onePieceLogo from './assets/photos/One piece logo.webp';
+import overcooked from './assets/photos/Overcooked.png';
+import severanceLogo from './assets/photos/Severance_logo.svg.png';
+import sofaFriends from './assets/photos/Sofa friends.png';
+import theOfficeLogo from './assets/photos/The-Office-Logo.png';
 import yarnyAzulColgando from './assets/photos/YarnyAzulColgando.png';
 import yarnyCorazon from './assets/photos/YarnyCorazon.png';
 import yarnyRojo from './assets/photos/YarnyRojo.png';
 import yarnyRojoColgando from './assets/photos/YarnyRojoColgando.png';
 import yarnysUnidos from './assets/photos/YarnysUnidos.png';
+import luffy from './assets/photos/luffy.webp';
 
 function HangingYarny({ src, alt, className, float = 0, delay = 0 }) {
   return (
@@ -53,6 +63,29 @@ function ThreadStoryMarker({ src, alt, className, sizeClassName, delay = 0 }) {
   );
 }
 
+function SharedTasteSticker({ item }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.88, y: 18 }}
+      whileInView={{ opacity: item.opacity ?? 0.9, scale: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.7, delay: item.delay ?? 0, ease: [0.22, 1, 0.36, 1] }}
+      className={`pointer-events-none absolute z-[8] hidden lg:block ${item.className}`}
+    >
+      <motion.img
+        src={item.src}
+        alt={item.alt}
+        className={`h-auto object-contain drop-shadow-[0_18px_34px_rgba(0,0,0,0.28)] ${item.sizeClassName}`}
+        animate={{
+          y: [0, item.float ?? -6, 0],
+          rotate: [item.rotate ?? -2, (item.rotate ?? -2) + 2, item.rotate ?? -2],
+        }}
+        transition={{ duration: item.duration ?? 7.5, repeat: Number.POSITIVE_INFINITY, ease: 'easeInOut' }}
+      />
+    </motion.div>
+  );
+}
+
 function IntroHero({ started, onStart }) {
   return (
     <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-12 sm:px-6">
@@ -69,14 +102,14 @@ function IntroHero({ started, onStart }) {
       <HangingYarny
         src={yarnyRojoColgando}
         alt="Yarny rojo colgando"
-        className="left-[3%] top-0 hidden w-28 md:block lg:w-36"
+        className="left-[10%] top-0 hidden w-28 md:block lg:w-36"
         float={2}
         delay={0.15}
       />
       <HangingYarny
         src={yarnyAzulColgando}
         alt="Yarny azul colgando"
-        className="right-[4%] top-0 hidden w-24 md:block lg:w-32"
+        className="right-[8%] top-0 hidden w-24 md:block lg:w-32"
         float={-1}
         delay={0.3}
       />
@@ -138,12 +171,15 @@ function IntroHero({ started, onStart }) {
             <p className="font-body text-[0.65rem] uppercase tracking-[0.28em] text-yarn-cream/80 sm:text-sm sm:tracking-[0.4em]">
               Segundo Aniversario
             </p>
+            <p className="font-body text-[0.65rem] uppercase tracking-[0.28em] text-yarn-cream/80 sm:text-sm sm:tracking-[0.4em]">
+              Yani y Vic
+            </p>
             <h1 className="mt-2 font-display text-[2.5rem] leading-none text-white sm:text-5xl md:text-7xl">
               Nuestro Hilo:
               <span className="block text-yarn-cream">Año 1 &amp; 2</span>
             </h1>
             <p className="mx-auto mt-4 max-w-xl font-body text-sm leading-6 text-white/80 sm:text-base sm:leading-7 md:text-lg">
-              Un scrapbook digital inspirado en los caminos suaves, los nudos fuertes
+              Un álbum de fotos digital inspirado en los caminos suaves, los nudos fuertes
               y la magia silenciosa de seguir construyendo juntos.
             </p>
             <p className="mt-6 font-body text-[0.65rem] uppercase tracking-[0.28em] text-white/55 sm:text-xs sm:tracking-[0.35em]">
@@ -160,6 +196,7 @@ export default function App() {
   const [started, setStarted] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const { scrollYProgress } = useScroll();
+  const timelineSectionRef = useRef(null);
 
   useEffect(() => {
     const media = window.matchMedia('(max-width: 767px)');
@@ -203,17 +240,130 @@ export default function App() {
     };
   }, [isMobile]);
 
+  const tasteStickers = useMemo(
+    () => [
+      {
+        src: friendsLogo,
+        alt: 'Logo de Friends',
+        className: '-left-6 top-[6%] xl:-left-14',
+        sizeClassName: 'w-32 xl:w-40',
+        rotate: -8,
+        float: -8,
+        opacity: 0.9,
+      },
+      {
+        src: centralPerk,
+        alt: 'Central Perk',
+        className: '-right-4 top-[11%] xl:-right-10',
+        sizeClassName: 'w-28 xl:w-32',
+        rotate: 7,
+        float: -7,
+        opacity: 0.9,
+        delay: 0.08,
+      },
+      {
+        src: severanceLogo,
+        alt: 'Logo de Severance',
+        className: '-left-10 top-[23%] xl:-left-16',
+        sizeClassName: 'w-36 xl:w-44',
+        rotate: -5,
+        float: -6,
+        opacity: 0.92,
+        delay: 0.12,
+      },
+      {
+        src: theOfficeLogo,
+        alt: 'Logo de The Office',
+        className: '-right-6 top-[30%] xl:-right-12',
+        sizeClassName: 'w-30 xl:w-36',
+        rotate: 6,
+        float: -5,
+        opacity: 0.88,
+        delay: 0.16,
+      },
+      {
+        src: detroitBecomeHuman,
+        alt: 'Detroit Become Human',
+        className: '-left-8 top-[40%] xl:-left-14',
+        sizeClassName: 'w-32 xl:w-36',
+        rotate: -4,
+        float: -7,
+        opacity: 0.9,
+        delay: 0.1,
+      },
+      {
+        src: overcooked,
+        alt: 'Overcooked',
+        className: '-right-4 top-[48%] xl:-right-10',
+        sizeClassName: 'w-28 xl:w-32',
+        rotate: 9,
+        float: -8,
+        opacity: 0.9,
+        delay: 0.2,
+      },
+      {
+        src: monicaTurkey,
+        alt: 'Monica con pavo en la cabeza',
+        className: '-left-4 top-[59%] xl:-left-10',
+        sizeClassName: 'w-28 xl:w-32',
+        rotate: -10,
+        float: -6,
+        opacity: 0.88,
+        delay: 0.06,
+      },
+      {
+        src: sofaFriends,
+        alt: 'Sofa de Friends',
+        className: '-right-8 top-[67%] xl:-right-14',
+        sizeClassName: 'w-32 xl:w-40',
+        rotate: 5,
+        float: -5,
+        opacity: 0.9,
+        delay: 0.14,
+      },
+      {
+        src: onePieceLogo,
+        alt: 'Logo de One Piece',
+        className: '-left-6 top-[78%] xl:-left-12',
+        sizeClassName: 'w-32 xl:w-36',
+        rotate: -6,
+        float: -7,
+        opacity: 0.92,
+        delay: 0.18,
+      },
+      {
+        src: luffy,
+        alt: 'Luffy',
+        className: '-right-4 top-[87%] xl:-right-10',
+        sizeClassName: 'w-28 xl:w-32',
+        rotate: 8,
+        float: -7,
+        opacity: 0.9,
+        delay: 0.1,
+      },
+    ],
+    [],
+  );
+
   useMotionValueEvent(scrollYProgress, 'change', (latest) => {
     if (latest > 0.015) {
       setStarted(true);
     }
   });
 
+  const handleIntroStart = () => {
+    setStarted(true);
+    timelineSectionRef.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  };
+
   return (
     <main className="min-h-screen overflow-x-clip bg-forest-950 text-white">
-      <IntroHero started={started} onStart={() => setStarted(true)} />
+      <IntroHero started={started} onStart={handleIntroStart} />
 
-      <section className="relative border-t border-white/10">
+      <section ref={timelineSectionRef} className="relative border-t border-white/10">
         <div className="absolute inset-0 overflow-hidden">
           <Parallax speed={-14} className="absolute inset-0">
             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1800&q=80')] bg-cover bg-center opacity-[0.18]" />
@@ -225,9 +375,6 @@ export default function App() {
 
         <div className="relative z-20 mx-auto max-w-6xl px-4 py-16 sm:py-24 md:px-8">
           <div className="mx-auto mb-10 max-w-2xl text-center sm:mb-14">
-            <p className="font-body text-[0.68rem] uppercase tracking-[0.28em] text-yarn-cream/70 sm:text-sm sm:tracking-[0.35em]">
-              Timeline principal
-            </p>
             <h2 className="mt-3 font-display text-[2.3rem] text-yarn-cream sm:text-4xl md:text-6xl">
               Un hilo que va cosiendo nuestra historia
             </h2>
@@ -255,6 +402,10 @@ export default function App() {
             />
 
             <YarnThread progress={scrollYProgress} points={timelineLayout.points} height={timelineLayout.height} />
+
+            {tasteStickers.map((item) => (
+              <SharedTasteSticker key={item.alt} item={item} />
+            ))}
 
             <ThreadStoryMarker
               src={yarnyRojo}

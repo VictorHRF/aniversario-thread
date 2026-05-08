@@ -32,7 +32,7 @@ const rawMemories = [
     image: monthZeroImage,
     title: 'Antes de ser novios',
     date: 'Mes 0',
-    caption: 'La visita al parque de atracciones fue de esos días ligeros y especiales que, sin avisar, empiezan a quedarse en el corazón.',
+    caption: 'La visita a Six Flags fue de esos días ligeros y especiales que, sin avisar, empiezan a quedarse en el corazón.',
     note: 'Todavía no éramos novios, pero algo bonito ya estaba empezando.',
   },
   {
@@ -40,7 +40,7 @@ const rawMemories = [
     image: dayOneImage,
     title: 'El día 1',
     date: 'Día 1',
-    caption: 'La cita en la cafetería fue el inicio oficial de esta historia que hoy seguimos tejiendo juntos.',
+    caption: 'La cita en la cafetería, la clase de baile y la charla en el parque de tu casa fue el inicio oficial de esta historia que hoy seguimos tejiendo juntos.',
     note: 'Aquí empezó oficialmente nuestro nosotros.',
   },
   {
@@ -73,7 +73,7 @@ const rawMemories = [
     title: 'Friends y risas en casa',
     date: 'Mes 4',
     caption: 'Ese mes nos regaló un plan simple y perfecto: ver Friends en casa y morirnos de risa juntos.',
-    note: 'Nada como compartir carcajadas contigo en casa.',
+    note: 'Nada como compartir carcajadas contigo.',
   },
   {
     key: 'month-5',
@@ -120,7 +120,7 @@ const rawMemories = [
     image: monthTenImage,
     title: 'Noche con tus hermanos',
     date: 'Mes 10',
-    caption: 'La salida de noche con los hermanos de mi novia fue otra de esas veces donde me sentí feliz de compartir su mundo.',
+    caption: 'Salidas de noche con tus hermanos pasando momentos muy divertidos y únicos.',
     note: 'Me encanta vivir también sus círculos contigo.',
   },
   {
@@ -214,9 +214,9 @@ const rawMemories = [
   {
     key: 'month-21',
     image: monthTwentyOneImage,
-    title: 'La boda de Roberto',
+    title: 'La boda de mis amigos',
     date: 'Mes 21',
-    caption: 'Celebrar la boda de mi amigo Roberto contigo a mi lado hizo que el momento se sintiera todavía mejor.',
+    caption: 'Celebrar la boda de mis amigos contigo a mi lado hizo que el momento se sintiera todavía mejor.',
     note: 'Ir de traje vale la pena si es contigo.',
   },
   {
